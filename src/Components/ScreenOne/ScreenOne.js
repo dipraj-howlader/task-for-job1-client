@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from '../Login/firebase.config';
 import { useHistory, useLocation } from 'react-router';
+import axios from 'axios';
 
 if (firebase.apps.length === 0) {
     firebase.initializeApp(firebaseConfig);
@@ -10,6 +11,8 @@ if (firebase.apps.length === 0) {
 
 
 const ScreenOne = () => {
+
+
     const history = useHistory();
     const location = useLocation();
     const { from } = location.state || { from: { pathname: "/screenTwo" } };
@@ -21,6 +24,16 @@ const ScreenOne = () => {
         error :''
       })
 
+      useEffect(() => {
+        axios.get('http://localhost:5000/token', 
+        { headers: 
+            {
+                'Content-type' : 'application/json',
+                authorization : `Bearer ${sessionStorage.getItem('token')}`
+            } 
+        })
+    },[])
+
     const handleLogin =(e) => {
         
         if (loggedInUser.email && loggedInUser.password) {
@@ -31,7 +44,9 @@ const ScreenOne = () => {
               const userLoggedIn  = {...loggedInUser}
               userLoggedIn.isSignedIn = true;
               setLoggedInUser(userLoggedIn);
+              storeAuthToken();
               history.replace(from);
+            
             })
             .catch((error) => {
 
@@ -58,6 +73,16 @@ const handlePassword = (e) =>{
     setLoggedInUser(addPassword);
     
 
+}
+
+const storeAuthToken = () =>{
+    firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+      console.log(idToken);
+      sessionStorage.setItem('token',idToken);
+
+      }).catch(function(error) {
+        // Handle error
+      });
 }
     return (
         <div style={{textAlign:'center'}}>
