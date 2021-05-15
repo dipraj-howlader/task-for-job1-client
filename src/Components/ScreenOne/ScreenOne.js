@@ -70,7 +70,8 @@ const handlePassword = (e) =>{
                 <input type="submit" value="Login" />
             </form>
             {
-              !loggedInUser.isSignedIn && <p style={{color:'red'}}>You have entered wrong information!</p>
+              !loggedInUser.isSignedIn &&   <p style={{color:'red'}}>You are entered wrong Information</p>
+
     
             }
         </div>
