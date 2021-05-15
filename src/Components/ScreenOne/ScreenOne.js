@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {useContext, useEffect } from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from '../Login/firebase.config';
 import { useHistory, useLocation } from 'react-router';
 import axios from 'axios';
+import { UserContext } from '../../App';
+
+
 
 if (firebase.apps.length === 0) {
     firebase.initializeApp(firebaseConfig);
@@ -12,17 +15,12 @@ if (firebase.apps.length === 0) {
 
 const ScreenOne = () => {
 
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
 
     const history = useHistory();
     const location = useLocation();
     const { from } = location.state || { from: { pathname: "/screenTwo" } };
 
-    const [loggedInUser, setLoggedInUser] =useState({
-        isSignedIn: true,
-        email: '',
-        password: '',
-        error :''
-      })
 
       useEffect(() => {
         axios.get('http://localhost:5000/token', 
@@ -79,7 +77,10 @@ const storeAuthToken = () =>{
     firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
       console.log(idToken);
       sessionStorage.setItem('token',idToken);
-
+    setTimeout(() =>{
+       sessionStorage.removeItem('token');
+       
+    },1000)
       }).catch(function(error) {
         // Handle error
       });
