@@ -12,7 +12,8 @@ export const UserContext = createContext();
 
 
 const App = () => {
-  
+
+
   const [loggedInUser, setLoggedInUser] =useState({
     isSignedIn: true,
     email: '',

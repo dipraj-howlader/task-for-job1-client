@@ -15,6 +15,11 @@ if (firebase.apps.length === 0) {
 
 const ScreenOne = () => {
 
+    // setTimeout(() =>{
+    //     sessionStorage.removeItem('token');
+        
+    //  },5000)
+
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
 
     const history = useHistory();
@@ -22,15 +27,15 @@ const ScreenOne = () => {
     const { from } = location.state || { from: { pathname: "/screenTwo" } };
 
 
-      useEffect(() => {
-        axios.get('http://localhost:5000/token', 
-        { headers: 
-            {
-                'Content-type' : 'application/json',
-                authorization : `Bearer ${sessionStorage.getItem('token')}`
-            } 
-        })
-    },[])
+    //   useEffect(() => {
+    //     axios.get('http://localhost:5000/token', 
+    //     { headers: 
+    //         {
+    //             'Content-type' : 'application/json',
+    //             authorization : `Bearer ${sessionStorage.getItem('token')}`
+    //         } 
+    //     })
+    // },[])
 
     const handleLogin =(e) => {
         
@@ -77,10 +82,7 @@ const storeAuthToken = () =>{
     firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
     //   console.log(idToken);
       sessionStorage.setItem('token',idToken);
-    setTimeout(() =>{
-       sessionStorage.removeItem('token');
-       
-    },300000)
+
       }).catch(function(error) {
         // Handle error
       });
