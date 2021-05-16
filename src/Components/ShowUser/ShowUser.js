@@ -7,7 +7,7 @@ const ShowUser = (props) => {
         alignItems:'center'
     }
     const {username,_id,email, address,number} = props.user;
-    console.log(username);
+
 const deleteProduct = (id)=>{
 
     fetch(`https://dry-oasis-44290.herokuapp.com/delete/${id}`, {
