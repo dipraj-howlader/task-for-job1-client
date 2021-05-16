@@ -64,7 +64,7 @@ const ScreenTwo = () => {
 
     return (
         <div style={{textAlign:'center'}}>
-            <h1>This is screen ScreenTwo</h1>
+            <h1>This is ScreenTwo</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                
       <input style={inputStyle} type="text" placeholder="Enter Valid username" {...register("username", { required: true, pattern: /^[a-zA-Z0-9]*$/ })} />
