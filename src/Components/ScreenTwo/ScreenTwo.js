@@ -3,7 +3,11 @@ import { useForm } from "react-hook-form";
 import ShowUser from '../ShowUser/ShowUser';
 
 const ScreenTwo = () => {
-
+    const inputStyle={
+        padding:'10px 0px 10px 0px',
+        marginTop: '5px',
+        width:'500px'
+    }
     const style ={
         paddingRight:'20px',
         paddingLeft:'10px',
@@ -27,7 +31,7 @@ const ScreenTwo = () => {
   const onSubmit = data => {
     
       
-      fetch('http://localhost:5000/addUser',{
+      fetch('https://dry-oasis-44290.herokuapp.com/addUser',{
         method:'POST',
         headers:{
             'content-type':'application/json',
@@ -45,7 +49,7 @@ const ScreenTwo = () => {
 
 
   useEffect(() => {
-    fetch('http://localhost:5000/user',{
+    fetch('https://dry-oasis-44290.herokuapp.com/user',{
         method: 'GET',
         headers: { 
             'Content-Type': 'application/json',
@@ -63,15 +67,15 @@ const ScreenTwo = () => {
             <h1>This is screen ScreenTwo</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                
-      <input type="text" placeholder="Enter Valid username" {...register("username", { required: true, pattern: /^[a-zA-Z0-9]*$/ })} />
+      <input style={inputStyle} type="text" placeholder="Enter Valid username" {...register("username", { required: true, pattern: /^[a-zA-Z0-9]*$/ })} />
       <br />
-      <input type="text" placeholder="Enter Valid number" {...register("number", { required:true,  pattern: /^\d{10}$/})} />
+      <input style={inputStyle} type="text" placeholder="Enter Valid number" {...register("number", { required:true,  pattern: /^\d{10}$/})} />
       <br />
-      <input type="email" placeholder="Enter Valid Email" {...register("email", { required:true, pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]*$/})} />
+      <input style={inputStyle} type="email" placeholder="Enter Valid Email" {...register("email", { required:true, pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]*$/})} />
       <br />
-      <input type="text" placeholder="Address" {...register("address",{required:true})} />
+      <input style={inputStyle} type="text" placeholder="Address" {...register("address",{required:true})} />
       <br />
-      <input type="submit" />
+      <input style={inputStyle} type="submit" />
     </form>
     <br />
             <div>

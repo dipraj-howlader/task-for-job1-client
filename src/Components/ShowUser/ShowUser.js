@@ -4,13 +4,13 @@ const ShowUser = (props) => {
     const style ={
         textAlign:'center',
         justifyContent:'center',
-        alignItems:'center',
+        alignItems:'center'
     }
     const {username,_id,email, address,number} = props.user;
     console.log(username);
 const deleteProduct = (id)=>{
 
-    fetch(`http://localhost:5000/delete/${id}`, {
+    fetch(`https://dry-oasis-44290.herokuapp.com/delete/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
