@@ -98,7 +98,7 @@ const storeAuthToken = () =>{
                 <input type="submit" value="Login" />
             </form>
             {
-              !loggedInUser.isSignedIn &&   <p style={{color:'red'}}>You are entered wrong Information</p>
+              !loggedInUser.isSignedIn &&   <p style={{color:'red'}}>You have entered wrong Information</p>
 
     
             }
